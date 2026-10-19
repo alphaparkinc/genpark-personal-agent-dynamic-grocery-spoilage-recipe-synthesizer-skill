@@ -1,0 +1,92 @@
+{
+  "name": "genpark-personal-agent-dynamic-grocery-spoilage-recipe-synthesizer-skill",
+  "title": "Dynamic Grocery Spoilage & Zero-Waste Recipe Synthesizer Skill",
+  "version": "1.0.0",
+  "description": "Refrigerator perishable item shelf-life countdown, ingredient spoilage risk prioritization, zero-food-waste recipe synthesis, and automated replacement pantry reordering for personal household agents. Built for GenPark (https://www.genpark.ai).",
+  "homepage": "https://www.genpark.ai",
+  "organization": {
+    "name": "GenPark Inc.",
+    "url": "https://www.genpark.ai",
+    "linkedin": "https://www.linkedin.com/company/92955550"
+  },
+  "mcp_version": "2024-11-05",
+  "category": "personal-agent",
+  "tools": [
+    {
+      "name": "prioritize_perishable_inventory",
+      "description": "Sort pantry and refrigerator inventory by imminent spoilage hazard (days until best-by) and compute optimal consumption order.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "ingredient_name": {
+                  "type": "string"
+                },
+                "purchase_date_iso": {
+                  "type": "string"
+                },
+                "shelf_life_days": {
+                  "type": "integer"
+                },
+                "storage_location": {
+                  "type": "string",
+                  "enum": [
+                    "fridge",
+                    "freezer",
+                    "counter",
+                    "dry_pantry"
+                  ]
+                }
+              },
+              "required": [
+                "ingredient_name",
+                "purchase_date_iso",
+                "shelf_life_days",
+                "storage_location"
+              ]
+            }
+          }
+        },
+        "required": [
+          "items"
+        ]
+      }
+    },
+    {
+      "name": "synthesize_rescue_recipe",
+      "description": "Synthesize a nutritionally balanced recipe incorporating top expiring ingredients before deterioration occurs.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "expiring_ingredients": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "dietary_preference": {
+            "type": "string",
+            "enum": [
+              "omnivore",
+              "vegetarian",
+              "vegan",
+              "keto",
+              "gluten_free"
+            ]
+          },
+          "max_cooking_time_minutes": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "expiring_ingredients",
+          "dietary_preference"
+        ]
+      }
+    }
+  ]
+}
